@@ -68,19 +68,22 @@ return button;\
     {
         for(int j=0;j<column;j++)
         {
-            NSString *buttonTitle = [self.mutArray objectAtIndex:(i*column+j)];
-            UIColor *buttonTitleColor = [UIColor blackColor];
-            CGRect buttonFrame = CGRectMake(10+100*j, 70+50*i, 100, 40);
-            //
-            UIButton *button = createButtonWithStatus(buttonFrame, buttonTitle, buttonTitleColor);
-            button.tag = i*column+j+10;
-            [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:button];
-            if(i==line-1)
+            if(i*column+j<[self.mutArray count])
             {
-                if(i*column+j==[self.mutArray count]-1)
+                NSString *buttonTitle = [self.mutArray objectAtIndex:(i*column+j)];
+                UIColor *buttonTitleColor = [UIColor blackColor];
+                CGRect buttonFrame = CGRectMake(10+100*j, 70+50*i, 100, 40);
+                //
+                UIButton *button = createButtonWithStatus(buttonFrame, buttonTitle, buttonTitleColor);
+                button.tag = i*column+j+10;
+                [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+                [self.view addSubview:button];
+                if(i==line-1)
                 {
-                    nextY = button.frame.origin.y+button.frame.size.height+50;
+                    if(i*column+j==[self.mutArray count]-1)
+                    {
+                        nextY = button.frame.origin.y+button.frame.size.height+50;
+                    }
                 }
             }
         }
